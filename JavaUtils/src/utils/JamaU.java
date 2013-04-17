@@ -2,6 +2,8 @@ package utils;
 
 import java.text.DecimalFormat;
 
+import javax.vecmath.Point3d;
+
 import Jama.Matrix;
 import Jama.SingularValueDecomposition;
 
@@ -128,6 +130,20 @@ public class JamaU {
 				for (int k = 0; k < min; k++)
 					inverse[i][j] += v[i][k] * singularValueReciprocals[k] * u[j][k];
 		return new Matrix(inverse);
+	}
+	
+	/**
+	 * Change a Point3d in Matrix
+	 *
+	 * @param p the Point3d to change
+	 * @return The Matrix of the Point3d p
+	 */
+	public static Matrix Point3dToMatrix(Point3d p) {
+		Matrix m = new Matrix(1, 3);
+		m.set(0, 0, p.x);
+		m.set(0, 1, p.y);
+		m.set(0, 2, p.z);
+		return m;
 	}
 	
 	/**
