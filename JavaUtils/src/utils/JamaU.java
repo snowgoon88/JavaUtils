@@ -13,7 +13,7 @@ public class JamaU {
 	static DecimalFormat df5_3 = new DecimalFormat( "00.000" );
 	
 	/** MachineEpsilon */
-	static double MACH_EPSILON = 2.220446049250313E-16;
+	static public double MACH_EPSILON = 2.220446049250313E-16;
 	
 	/** 
 	 * Update MACH_EPSILON

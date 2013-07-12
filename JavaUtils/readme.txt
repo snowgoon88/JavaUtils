@@ -1,5 +1,8 @@
 JavaUtils - Nice utilities for Java
 
+12/07/2013 - utils/RLink
+  * Passer des fichier entre 'R' (logiciel de Stat) et Java
+
 09/06/2013 - utils/JamaU.java
   * Matrix -> String
   * calcul d'une pseudo-inverse pour Jama
