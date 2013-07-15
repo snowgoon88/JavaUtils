@@ -86,16 +86,11 @@ public class TestRLink {
 		System.out.println("mRead = "+JamaU.matToString(mRead));
 		
 		// Check they are equal
-		Matrix diff = A.minus(mRead);
-		for (int i = 0; i < diff.getRowDimension(); i++) {
-			for (int j = 0; j < diff.getColumnDimension(); j++) {
-				if (Math.abs(diff.get(i, j)) > JamaU.MACH_EPSILON) {
-					System.err.println("testReadRData FAILED");
-					System.err.println("target MATRIX="+JamaU.matToString(A));
-					System.err.println("read   MATRIX="+JamaU.matToString(mRead));
-					return false;
-				}
-			}
+		if (JamaU.isNearZero(A.minus(mRead)) == false ) {
+			System.err.println("testReadRData FAILED");
+			System.err.println("target MATRIX="+JamaU.matToString(A));
+			System.err.println("read   MATRIX="+JamaU.matToString(mRead));
+			return false;
 		}
 		return true;
 	}
@@ -116,16 +111,11 @@ public class TestRLink {
 		System.out.println("mRead = "+JamaU.matToString(mRead));
 		
 		// Check they are equal
-		Matrix diff = B.minus(mRead);
-		for (int i = 0; i < diff.getRowDimension(); i++) {
-			for (int j = 0; j < diff.getColumnDimension(); j++) {
-				if (Math.abs(diff.get(i, j)) > JamaU.MACH_EPSILON) {
-					System.err.println("testWriteRData FAILED");
-					System.err.println("target MATRIX="+JamaU.matToString(B));
-					System.err.println("read   MATRIX="+JamaU.matToString(mRead));
-					return false;
-				}
-			}
+		if (JamaU.isNearZero(B.minus(mRead)) == false ) {
+			System.err.println("testWriteRData FAILED");
+			System.err.println("target MATRIX="+JamaU.matToString(B));
+			System.err.println("read   MATRIX="+JamaU.matToString(mRead));
+			return false;
 		}
 		return true;
 	}

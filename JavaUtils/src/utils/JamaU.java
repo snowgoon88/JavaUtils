@@ -47,6 +47,40 @@ public class JamaU {
 		}
 		return scalarProduct;
 	}
+	
+	/**
+	 * Check if all elements of Matrix are nearly equal to 0, 
+	 * with a threshold of JamaU.MACH_EPSILON 
+	 * @param m Matrix to test
+	 * @return true if every abs(m(i,j)) <= JamaU.MACH_EPSILON
+	 */
+	static public boolean isNearZero( Matrix m ) {
+		for (int i = 0; i < m.getRowDimension(); i++) {
+			for (int j = 0; j < m.getColumnDimension(); j++) {
+				if (Math.abs(m.get(i, j)) > JamaU.MACH_EPSILON) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	/**
+	 * Check if all elements of Matrix are nearly equal to 0, 
+	 * with a threshold of epsilon 
+	 * @param m Matrix to test
+	 * @param epsilon threshold
+	 * @return true if every abs(m(i,j)) <= epsilon
+	 */
+	static public boolean isNearZero( Matrix m, double epsilon ) {
+		for (int i = 0; i < m.getRowDimension(); i++) {
+			for (int j = 0; j < m.getColumnDimension(); j++) {
+				if (Math.abs(m.get(i, j)) > epsilon) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Compute the pseudo inverse of a Matrix.
