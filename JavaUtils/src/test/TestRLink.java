@@ -46,6 +46,16 @@ public class TestRLink {
 				System.err.println("testReadRData >> "+res);
 			}
 			
+			nbTest ++;
+			res = testWriteRDataFile();
+			if (res) {
+				System.out.println("testReadRData >> "+res);
+				nbPassed ++;
+			}
+			else {
+				System.err.println("testReadRData >> "+res);
+			}
+			
 			if (nbTest > nbPassed) {
 				System.err.println("FAILURE : only "+nbPassed+" success out of "+nbTest);
 				System.exit(1);
@@ -61,11 +71,10 @@ public class TestRLink {
 	}
 
 	/**
-	 * Read a file written in R with
-	 * > write.table( object, file="filename", quote=FALSE, row.names=FALSE)
+	 * Read a file written in R.
 	 * 
 	 * @param filename
-	 * @return Matrix of the proper size
+	 * @return true if test OK
 	 * @throws IOException 
 	 */
 	public boolean testReadRDataFile() 
@@ -83,6 +92,36 @@ public class TestRLink {
 				if (Math.abs(diff.get(i, j)) > JamaU.MACH_EPSILON) {
 					System.err.println("testReadRData FAILED");
 					System.err.println("target MATRIX="+JamaU.matToString(A));
+					System.err.println("read   MATRIX="+JamaU.matToString(mRead));
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Write a Matrix as a file for R.
+	 * 
+	 * @return true if test OK
+	 * @throws IOException 
+	 */
+	public boolean testWriteRDataFile() throws IOException {
+		// target Matrix -row by row
+		Matrix B = new Matrix(new double [][] {{1,2,3,4,5},{2,3,4,5,6},{5,4,3,2,1}});
+		
+		RLink.writeRDataFile( B, "src/test/matB.Rdata");
+		
+		Matrix mRead = RLink.readRDataFile( "src/test/matB.Rdata" );
+		System.out.println("mRead = "+JamaU.matToString(mRead));
+		
+		// Check they are equal
+		Matrix diff = B.minus(mRead);
+		for (int i = 0; i < diff.getRowDimension(); i++) {
+			for (int j = 0; j < diff.getColumnDimension(); j++) {
+				if (Math.abs(diff.get(i, j)) > JamaU.MACH_EPSILON) {
+					System.err.println("testWriteRData FAILED");
+					System.err.println("target MATRIX="+JamaU.matToString(B));
 					System.err.println("read   MATRIX="+JamaU.matToString(mRead));
 					return false;
 				}
