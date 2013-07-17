@@ -11,6 +11,7 @@ public class JamaU {
 	
 	/** Decimal formating */
 	static DecimalFormat df5_3 = new DecimalFormat( "00.000" );
+	static DecimalFormat df3_2 = new DecimalFormat( "0.00" );
 	
 	/** MachineEpsilon */
 	static public double MACH_EPSILON = 2.220446049250313E-16;

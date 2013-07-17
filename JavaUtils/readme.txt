@@ -1,5 +1,8 @@
 JavaUtils - Nice utilities for Java
 
+17/07/2013 - KdTRee
+  * KdTree (imported from net) are operationnal and tested
+
 12/07/2013 - utils/RLink
   * Passer des fichier entre 'R' (logiciel de Stat) et Java
 

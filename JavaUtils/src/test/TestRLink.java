@@ -31,7 +31,8 @@ public class TestRLink {
 //		} catch (IOException e) { 
 //			e.printStackTrace();
 //		}
-		
+	}
+	public void run() {
 		boolean res;
 		int nbTest = 0;
 		int nbPassed = 0;
@@ -125,6 +126,7 @@ public class TestRLink {
 	 */
 	public static void main(String[] args) {
 		TestRLink app = new TestRLink();
+		app.run();
 	}
 
 }
