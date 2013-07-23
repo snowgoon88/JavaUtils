@@ -1,5 +1,8 @@
 JavaUtils - Nice utilities for Java
 
+23/07/2013 - Log<T>
+  * Wraper around BuffereWrite(File) to log a T.toString() in a file.
+
 17/07/2013 - KdTRee
   * KdTree (imported from net) are operationnal and tested
 
