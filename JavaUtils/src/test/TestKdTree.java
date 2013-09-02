@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -55,6 +56,15 @@ public class TestKdTree {
 			}
 			else {
 				System.err.println("testNeighbors >> "+res);
+			}
+			nbTest ++;
+			res = testIterator();
+			if (res) {
+				System.out.println("testIterator >> "+res);
+				nbPassed ++;
+			}
+			else {
+				System.err.println("testIterator >> "+res);
 			}
 
 			if (nbTest > nbPassed) {
@@ -169,6 +179,34 @@ public class TestKdTree {
 		return true;
 		
 	}
+	/**
+	 * TestIterator
+	 */
+	boolean testIterator() {
+		// KdTree avec des points en 2 dimensions
+		KdTree<Double> kdtree = new KdTree<>(2, 4);
+		System.out.println("--creation-----------");
+		kdtree.dumpDisplay("");
+		
+		for (int i = 0; i < 10; i++) {
+			kdtree.addPoint(rndPoint(2), rnd.nextGaussian());
+		}
+		
+		System.out.println("--dump-----------");
+		kdtree.dumpDisplay("");
+		
+		// Using Iterator
+		System.out.println("--iterator-----------");
+		int nb = 0;
+		for (Iterator<Double> it = kdtree.getKdTreeIterator(); it.hasNext();) {
+			Double val = (Double) it.next();
+			System.out.println("Val = "+val);
+			nb += 1;
+		}
+		return nb==10;
+	}
+	
+	
 	// Generate random point of dimension 'dim'.
 	double[] rndPoint(int dim) {
 		double[] pt = new double[dim];

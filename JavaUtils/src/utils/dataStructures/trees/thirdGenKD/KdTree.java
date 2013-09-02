@@ -26,6 +26,10 @@ public class KdTree<T> extends KdNode<T> {
     public KdTree(int dimensions, int bucketCapacity) {
         super(dimensions, bucketCapacity);
     }
+    
+    public KdTreeIterator<T> getKdTreeIterator() {
+    	return new KdTreeIterator<T>(this);
+    }
 
     public NearestNeighborIterator<T> getNearestNeighborIterator(double[] searchPoint, int maxPointsReturned, DistanceFunction distanceFunction) {
         return new NearestNeighborIterator<T>(this, searchPoint,
