@@ -155,7 +155,7 @@ public class TestKdTree {
 	 */
 	boolean testCreateAdd() {
 		// KdTree avec des points en 2 dimensions
-		KdTree<Double> kdtree = new KdTree<>(2, 7);
+		KdTree<Double> kdtree = new KdTree<Double>(2, 7);
 		System.out.println("-------------");
 		kdtree.dumpDisplay("");
 		

@@ -24,8 +24,27 @@ public class GraphicHelper {
 			Color.cyan, Color.magenta, Color.pink, Color.black };
 	
 	/** Returns an ImageIcon, or null if the path was invalid. */
+	@Deprecated
 	public ImageIcon createImageIcon(String path, String description) {
-	    java.net.URL imgURL = getClass().getResource(path);
+	    System.err.println("createImageIcon(String path, String description) is deprecated");
+	    System.err.println("Use the static method instead");
+	    return null;
+	}
+	/** 
+	 * Returns an ImageIcon, or null if the path was invalid.
+	 * The Path is given from the class using this method.
+	 * 
+	 * Example : the image "img.png" is in the same package as obj.
+	 * <code>ImageIcon img = GraphicHelper.createImageIcon(obj, "img.png", "An example");
+	 * 
+	 * @param from the Object loading the ImageIcon
+	 * @param path Either absolute (begins with '/') or relative to object package.
+	 * @param description A string used as image description.
+	 * 
+	 * @return null (Image not Found) or ImageIcon
+	 */
+	static public ImageIcon createImageIcon(Object from, String path, String description) {
+	    java.net.URL imgURL = from.getClass().getResource(path);
 	    if (imgURL != null) {
 	    	ImageIcon img = new ImageIcon(imgURL, description);
 	        return img;

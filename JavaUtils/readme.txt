@@ -2,6 +2,8 @@ JavaUtils - Nice utilities for Java
 
 02/08/2013 - KdTreeIterator added
 
+08/08/2013 - GraphicHelper => static version of createImageIcon.
+
 23/07/2013 - Log<T>
   * Wraper around BuffereWrite(File) to log a T.toString() in a file.
 
