@@ -4,15 +4,19 @@
 package test;
 
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+
 import org.kohsuke.args4j.Option;
 
+import utils.IParameters;
 import utils.ParameterFactory;
 
 /**
  * 
  * @author alain.dutech@loria.fr
  */
-public class TestParam {
+public class TestParam implements IParameters {
 	
 	/** Global Parameters */
 	@Option(name="--root",aliases={"-r"},usage="RootParam")
@@ -140,6 +144,13 @@ public class TestParam {
 		}
 		
 		return res;
+	}
+	
+	@Override
+	public void printValues(OutputStream out) {
+		PrintStream pout = new PrintStream(out);
+		pout.println("### "+getClass().getName());
+		pout.println("#     root="+_root);
 	}
 	
 	/**

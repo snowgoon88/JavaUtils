@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,14 +36,20 @@ import org.kohsuke.args4j.spi.OptionHandler;
  * @author alain.dutech@loria.fr
  * @author Build on args4j by Kohsuke Kawaguchi (http://args4j.kohsuke.org/)
  */
-public class ParameterFactory {
+public class ParameterFactory implements IParameters {
 	
 	/** File to read parameters from */
 	@Option(name="-f",aliases={"--paramFile"},usage="File to read parameters from")
 	public String paramFile = "";
+	/** Flag to get usage */
+	@Option(name="-h",aliases={"--help"},usage="Print list of parmaters and usage")
+	public boolean _help = false;
+	/** Flag to get default value */
+	@Option(name="-s",aliases={"--showParam"},usage="Print list of parameters values")
+	public boolean _show = false;
 	
 	/** List of Object with Parameters */
-	ArrayList<Object> _toParse;
+	ArrayList<IParameters> _toParse;
 	/** Parser for the whole list of Objects */
 	ListCmdLineParser _superParser;
 	
@@ -52,7 +59,7 @@ public class ParameterFactory {
 	 * adding 'this' as first Object to parse.
 	 */
 	public ParameterFactory() {
-		_toParse = new ArrayList<Object>();
+		_toParse = new ArrayList<IParameters>();
 		_toParse.add(this);
 		
 		_superParser = null;
@@ -60,6 +67,7 @@ public class ParameterFactory {
 
 	/**
 	 * Parse from CommandLine then from file if given by the -f <paramFile> option.
+	 * Take into account "-s/showParam" and "-h/help" parameters.
 	 * 
 	 * @param args
 	 * @return true if all Parameters set.
@@ -72,6 +80,9 @@ public class ParameterFactory {
 		if (res == true && paramFile != "") {
 			res = parseFromFile( paramFile );
 		}
+		if (_help) printUsage(System.out);
+		if (_show) printValues(System.out);
+		
 		return res;
 	}
 	/**
@@ -149,7 +160,7 @@ public class ParameterFactory {
 	 * 
 	 * @param obj
 	 */
-	public void addObjectWithParameters(Object obj) {
+	public void addObjectWithParameters(IParameters obj) {
 		_toParse.add( obj );
 	}
 	
@@ -163,6 +174,19 @@ public class ParameterFactory {
 			_superParser = new ListCmdLineParser(null);
 		}
 		_superParser.printUsage(out);
+	}
+	/** 
+	 * Print Default Parameters value.
+	 */
+	public void printValues(OutputStream out) {
+		PrintStream pout = new PrintStream(out);
+		pout.println("### "+getClass().getName());
+		pout.println("#     paramFile="+paramFile);
+		for (IParameters itemParsed : _toParse) {
+			if (itemParsed.equals(this) == false ) {
+				itemParsed.printValues(out);
+			}
+		}
 	}
 	
 	/**
