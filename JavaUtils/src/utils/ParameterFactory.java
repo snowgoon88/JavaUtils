@@ -174,6 +174,7 @@ public class ParameterFactory implements IParameters {
 			_superParser = new ListCmdLineParser(null);
 		}
 		_superParser.printUsage(out);
+		System.exit(0);
 	}
 	/** 
 	 * Print Default Parameters value.
@@ -187,6 +188,7 @@ public class ParameterFactory implements IParameters {
 				itemParsed.printValues(out);
 			}
 		}
+		System.exit(0);
 	}
 	
 	/**
