@@ -1,5 +1,7 @@
 JavaUtils - Nice utilities for Java
 
+22/10/2013 - Simplex : algorithm added, crude checking of feasability !!!
+
 16/09/2013 - ParameterFactory : read GLOBAL and local Parameters from file and args.
 
 02/08/2013 - KdTreeIterator added
