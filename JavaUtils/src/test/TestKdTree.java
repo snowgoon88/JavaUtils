@@ -184,7 +184,7 @@ public class TestKdTree {
 	 */
 	boolean testIterator() {
 		// KdTree avec des points en 2 dimensions
-		KdTree<Double> kdtree = new KdTree<>(2, 4);
+		KdTree<Double> kdtree = new KdTree<Double>(2, 4);
 		System.out.println("--creation-----------");
 		kdtree.dumpDisplay("");
 		
